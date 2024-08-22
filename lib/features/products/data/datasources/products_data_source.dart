@@ -20,13 +20,15 @@ class ProductsDataSourceImpl implements ProductsDataSource {
   @override
   Future<ProductsModel> getProducts(ProductsData data) async {
     final response = await client.get(
-      Uri.parse('${Env.apiUrl}/products?limit=10&skip=10'),
+      Uri.parse(
+          '${Env.apiUrl}/products?limit=${data.limit}&skip=${data.offset}'),
       headers: <String, String>{
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "Bearer "
       },
     );
+
+    print(response.body);
 
     final result = json.decode(response.body);
 

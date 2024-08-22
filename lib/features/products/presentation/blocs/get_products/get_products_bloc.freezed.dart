@@ -16,44 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GetProductsEvent {
-  ProductsData get data => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ProductsData data) getProducts,
+    required TResult Function() getProducts,
+    required TResult Function() getMoreProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ProductsData data)? getProducts,
+    TResult? Function()? getProducts,
+    TResult? Function()? getMoreProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ProductsData data)? getProducts,
+    TResult Function()? getProducts,
+    TResult Function()? getMoreProducts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetProducts value) getProducts,
+    required TResult Function(GetMoreProducts value) getMoreProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetProducts value)? getProducts,
+    TResult? Function(GetMoreProducts value)? getMoreProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetProducts value)? getProducts,
+    TResult Function(GetMoreProducts value)? getMoreProducts,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of GetProductsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $GetProductsEventCopyWith<GetProductsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -62,8 +61,6 @@ abstract class $GetProductsEventCopyWith<$Res> {
   factory $GetProductsEventCopyWith(
           GetProductsEvent value, $Res Function(GetProductsEvent) then) =
       _$GetProductsEventCopyWithImpl<$Res, GetProductsEvent>;
-  @useResult
-  $Res call({ProductsData data});
 }
 
 /// @nodoc
@@ -78,29 +75,13 @@ class _$GetProductsEventCopyWithImpl<$Res, $Val extends GetProductsEvent>
 
   /// Create a copy of GetProductsEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? data = null,
-  }) {
-    return _then(_value.copyWith(
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as ProductsData,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$GetProductsImplCopyWith<$Res>
-    implements $GetProductsEventCopyWith<$Res> {
+abstract class _$$GetProductsImplCopyWith<$Res> {
   factory _$$GetProductsImplCopyWith(
           _$GetProductsImpl value, $Res Function(_$GetProductsImpl) then) =
       __$$GetProductsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({ProductsData data});
 }
 
 /// @nodoc
@@ -113,76 +94,54 @@ class __$$GetProductsImplCopyWithImpl<$Res>
 
   /// Create a copy of GetProductsEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? data = null,
-  }) {
-    return _then(_$GetProductsImpl(
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as ProductsData,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$GetProductsImpl implements GetProducts {
-  const _$GetProductsImpl({required this.data});
-
-  @override
-  final ProductsData data;
+  const _$GetProductsImpl();
 
   @override
   String toString() {
-    return 'GetProductsEvent.getProducts(data: $data)';
+    return 'GetProductsEvent.getProducts()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetProductsImpl &&
-            (identical(other.data, data) || other.data == data));
+        (other.runtimeType == runtimeType && other is _$GetProductsImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
-
-  /// Create a copy of GetProductsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetProductsImplCopyWith<_$GetProductsImpl> get copyWith =>
-      __$$GetProductsImplCopyWithImpl<_$GetProductsImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ProductsData data) getProducts,
+    required TResult Function() getProducts,
+    required TResult Function() getMoreProducts,
   }) {
-    return getProducts(data);
+    return getProducts();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ProductsData data)? getProducts,
+    TResult? Function()? getProducts,
+    TResult? Function()? getMoreProducts,
   }) {
-    return getProducts?.call(data);
+    return getProducts?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ProductsData data)? getProducts,
+    TResult Function()? getProducts,
+    TResult Function()? getMoreProducts,
     required TResult orElse(),
   }) {
     if (getProducts != null) {
-      return getProducts(data);
+      return getProducts();
     }
     return orElse();
   }
@@ -191,6 +150,7 @@ class _$GetProductsImpl implements GetProducts {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetProducts value) getProducts,
+    required TResult Function(GetMoreProducts value) getMoreProducts,
   }) {
     return getProducts(this);
   }
@@ -199,6 +159,7 @@ class _$GetProductsImpl implements GetProducts {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetProducts value)? getProducts,
+    TResult? Function(GetMoreProducts value)? getMoreProducts,
   }) {
     return getProducts?.call(this);
   }
@@ -207,6 +168,7 @@ class _$GetProductsImpl implements GetProducts {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetProducts value)? getProducts,
+    TResult Function(GetMoreProducts value)? getMoreProducts,
     required TResult orElse(),
   }) {
     if (getProducts != null) {
@@ -217,18 +179,112 @@ class _$GetProductsImpl implements GetProducts {
 }
 
 abstract class GetProducts implements GetProductsEvent {
-  const factory GetProducts({required final ProductsData data}) =
-      _$GetProductsImpl;
+  const factory GetProducts() = _$GetProductsImpl;
+}
 
-  @override
-  ProductsData get data;
+/// @nodoc
+abstract class _$$GetMoreProductsImplCopyWith<$Res> {
+  factory _$$GetMoreProductsImplCopyWith(_$GetMoreProductsImpl value,
+          $Res Function(_$GetMoreProductsImpl) then) =
+      __$$GetMoreProductsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetMoreProductsImplCopyWithImpl<$Res>
+    extends _$GetProductsEventCopyWithImpl<$Res, _$GetMoreProductsImpl>
+    implements _$$GetMoreProductsImplCopyWith<$Res> {
+  __$$GetMoreProductsImplCopyWithImpl(
+      _$GetMoreProductsImpl _value, $Res Function(_$GetMoreProductsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of GetProductsEvent
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GetMoreProductsImpl implements GetMoreProducts {
+  const _$GetMoreProductsImpl();
+
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetProductsImplCopyWith<_$GetProductsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  String toString() {
+    return 'GetProductsEvent.getMoreProducts()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetMoreProductsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getProducts,
+    required TResult Function() getMoreProducts,
+  }) {
+    return getMoreProducts();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getProducts,
+    TResult? Function()? getMoreProducts,
+  }) {
+    return getMoreProducts?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getProducts,
+    TResult Function()? getMoreProducts,
+    required TResult orElse(),
+  }) {
+    if (getMoreProducts != null) {
+      return getMoreProducts();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetProducts value) getProducts,
+    required TResult Function(GetMoreProducts value) getMoreProducts,
+  }) {
+    return getMoreProducts(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetProducts value)? getProducts,
+    TResult? Function(GetMoreProducts value)? getMoreProducts,
+  }) {
+    return getMoreProducts?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetProducts value)? getProducts,
+    TResult Function(GetMoreProducts value)? getMoreProducts,
+    required TResult orElse(),
+  }) {
+    if (getMoreProducts != null) {
+      return getMoreProducts(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetMoreProducts implements GetProductsEvent {
+  const factory GetMoreProducts() = _$GetMoreProductsImpl;
 }
 
 /// @nodoc
@@ -237,7 +293,8 @@ mixin _$GetProductsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProductsModel result) loaded,
+    required TResult Function(List<Product> products, bool hasReachedMax)
+        loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -245,7 +302,7 @@ mixin _$GetProductsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsModel result)? loaded,
+    TResult? Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -253,7 +310,7 @@ mixin _$GetProductsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsModel result)? loaded,
+    TResult Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -349,7 +406,8 @@ class _$GetProductsInitialImpl implements _GetProductsInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProductsModel result) loaded,
+    required TResult Function(List<Product> products, bool hasReachedMax)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -360,7 +418,7 @@ class _$GetProductsInitialImpl implements _GetProductsInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsModel result)? loaded,
+    TResult? Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -371,7 +429,7 @@ class _$GetProductsInitialImpl implements _GetProductsInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsModel result)? loaded,
+    TResult Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -466,7 +524,8 @@ class _$GetProductsLoadingImpl implements _GetProductsLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProductsModel result) loaded,
+    required TResult Function(List<Product> products, bool hasReachedMax)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -477,7 +536,7 @@ class _$GetProductsLoadingImpl implements _GetProductsLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsModel result)? loaded,
+    TResult? Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -488,7 +547,7 @@ class _$GetProductsLoadingImpl implements _GetProductsLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsModel result)? loaded,
+    TResult Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -546,7 +605,7 @@ abstract class _$$GetProductsLoadedImplCopyWith<$Res> {
           $Res Function(_$GetProductsLoadedImpl) then) =
       __$$GetProductsLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ProductsModel result});
+  $Res call({List<Product> products, bool hasReachedMax});
 }
 
 /// @nodoc
@@ -562,13 +621,18 @@ class __$$GetProductsLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = null,
+    Object? products = null,
+    Object? hasReachedMax = null,
   }) {
     return _then(_$GetProductsLoadedImpl(
-      result: null == result
-          ? _value.result
-          : result // ignore: cast_nullable_to_non_nullable
-              as ProductsModel,
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<Product>,
+      hasReachedMax: null == hasReachedMax
+          ? _value.hasReachedMax
+          : hasReachedMax // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -576,14 +640,24 @@ class __$$GetProductsLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetProductsLoadedImpl implements _GetProductsLoaded {
-  const _$GetProductsLoadedImpl({required this.result});
+  const _$GetProductsLoadedImpl(
+      {required final List<Product> products, required this.hasReachedMax})
+      : _products = products;
+
+  final List<Product> _products;
+  @override
+  List<Product> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
 
   @override
-  final ProductsModel result;
+  final bool hasReachedMax;
 
   @override
   String toString() {
-    return 'GetProductsState.loaded(result: $result)';
+    return 'GetProductsState.loaded(products: $products, hasReachedMax: $hasReachedMax)';
   }
 
   @override
@@ -591,11 +665,14 @@ class _$GetProductsLoadedImpl implements _GetProductsLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetProductsLoadedImpl &&
-            (identical(other.result, result) || other.result == result));
+            const DeepCollectionEquality().equals(other._products, _products) &&
+            (identical(other.hasReachedMax, hasReachedMax) ||
+                other.hasReachedMax == hasReachedMax));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, result);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_products), hasReachedMax);
 
   /// Create a copy of GetProductsState
   /// with the given fields replaced by the non-null parameter values.
@@ -611,10 +688,11 @@ class _$GetProductsLoadedImpl implements _GetProductsLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProductsModel result) loaded,
+    required TResult Function(List<Product> products, bool hasReachedMax)
+        loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(result);
+    return loaded(products, hasReachedMax);
   }
 
   @override
@@ -622,10 +700,10 @@ class _$GetProductsLoadedImpl implements _GetProductsLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsModel result)? loaded,
+    TResult? Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(result);
+    return loaded?.call(products, hasReachedMax);
   }
 
   @override
@@ -633,12 +711,12 @@ class _$GetProductsLoadedImpl implements _GetProductsLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsModel result)? loaded,
+    TResult Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(result);
+      return loaded(products, hasReachedMax);
     }
     return orElse();
   }
@@ -682,10 +760,12 @@ class _$GetProductsLoadedImpl implements _GetProductsLoaded {
 }
 
 abstract class _GetProductsLoaded implements GetProductsState {
-  const factory _GetProductsLoaded({required final ProductsModel result}) =
-      _$GetProductsLoadedImpl;
+  const factory _GetProductsLoaded(
+      {required final List<Product> products,
+      required final bool hasReachedMax}) = _$GetProductsLoadedImpl;
 
-  ProductsModel get result;
+  List<Product> get products;
+  bool get hasReachedMax;
 
   /// Create a copy of GetProductsState
   /// with the given fields replaced by the non-null parameter values.
@@ -765,7 +845,8 @@ class _$GetProductsErrorImpl implements _GetProductsError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProductsModel result) loaded,
+    required TResult Function(List<Product> products, bool hasReachedMax)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -776,7 +857,7 @@ class _$GetProductsErrorImpl implements _GetProductsError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsModel result)? loaded,
+    TResult? Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -787,7 +868,7 @@ class _$GetProductsErrorImpl implements _GetProductsError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsModel result)? loaded,
+    TResult Function(List<Product> products, bool hasReachedMax)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

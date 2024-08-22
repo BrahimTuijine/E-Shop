@@ -1,8 +1,8 @@
 class ProductsData {
   final int limit;
-  final int skip;
+  final int offset;
   ProductsData({
     required this.limit,
-    required this.skip,
+    required this.offset,
   });
 }

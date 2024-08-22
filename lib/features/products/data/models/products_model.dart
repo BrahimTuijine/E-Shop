@@ -1,11 +1,11 @@
 class ProductsModel {
-  final List<Product>? products;
+  final List<Product> products;
   final int? total;
   final int? skip;
   final int? limit;
 
   ProductsModel({
-    this.products,
+    required this.products,
     this.total,
     this.skip,
     this.limit,
@@ -22,9 +22,7 @@ class ProductsModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "products": products == null
-            ? []
-            : List<dynamic>.from(products!.map((x) => x.toJson())),
+        "products": List<dynamic>.from(products.map((x) => x.toJson())),
         "total": total,
         "skip": skip,
         "limit": limit,

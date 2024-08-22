@@ -14,18 +14,60 @@ part 'get_products_state.dart';
 class GetProductsBloc extends Bloc<GetProductsEvent, GetProductsState> {
   final GetProductsUseCase getProductsUseCase;
 
+  final int limit = 10;
+  int offset = 0;
+  List<Product> oldData = [];
+
+  bool hasReachedMax = false;
+
   GetProductsBloc({required this.getProductsUseCase})
       : super(const _GetProductsInitial()) {
     on<GetProductsEvent>((event, emit) async {
-      emit(const GetProductsState.loading());
+      await event.when(
+        getProducts: () async {
+          emit(const GetProductsState.loading());
 
-      final result = await getProductsUseCase(event.data);
+          final ProductsData productData =
+              ProductsData(limit: limit, offset: offset);
 
-      result.fold((failure) {
-        emit(GetProductsState.error(message: mapFailureToMessage(failure)));
-      }, (result) {
-        emit(GetProductsState.loaded(result: result));
-      });
+          final result = await getProductsUseCase(productData);
+
+          result.fold((failure) {
+            emit(GetProductsState.error(message: mapFailureToMessage(failure)));
+          }, (result) {
+            oldData = result.products;
+            hasReachedMax = result.products.length < 10;
+            emit(GetProductsState.loaded(
+              products: result.products,
+              hasReachedMax: hasReachedMax,
+            ));
+          });
+        },
+        getMoreProducts: () async {
+          if (hasReachedMax) return;
+          offset++;
+          final result = await getProductsUseCase(
+            ProductsData(
+              limit: limit,
+              offset: offset,
+            ),
+          );
+
+          result.fold((failure) {
+            emit(GetProductsState.error(message: mapFailureToMessage(failure)));
+          }, (ProductsModel newData) {
+            oldData = [
+              ...oldData,
+              ...newData.products,
+            ];
+            hasReachedMax = newData.products.length < 10;
+            emit(GetProductsState.loaded(
+              products: oldData,
+              hasReachedMax: hasReachedMax,
+            ));
+          });
+        },
+      );
     });
   }
 }
