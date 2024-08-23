@@ -6,6 +6,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProductListTile extends StatelessWidget {
   final Product product;
+  final bool? isFromSearch;
+
+  const ProductListTile({
+    super.key,
+    required this.product,
+    this.isFromSearch = true,
+  });
 
   bool isNewProduct(DateTime? createdAt) {
     if (createdAt == null) return false;
@@ -14,18 +21,12 @@ class ProductListTile extends StatelessWidget {
     return difference.inDays <= 3;
   }
 
-  const ProductListTile({
-    super.key,
-    required this.product,
-  });
-
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: ShapeDecoration(
         color: Colors.white,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         shadows: const [
           BoxShadow(
             color: Color(0x28D4D4D4),
@@ -37,8 +38,7 @@ class ProductListTile extends StatelessWidget {
       ),
       child: ListTile(
         titleAlignment: ListTileTitleAlignment.center,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         //TODO change it to cachedNetworkImage
         leading: Image.network(
           product.thumbnail.toString(),
@@ -66,7 +66,7 @@ class ProductListTile extends StatelessWidget {
                 initialRating: product.rating!,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
-    
+
                 itemCount: 5,
                 // itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => const Icon(
@@ -94,12 +94,14 @@ class ProductListTile extends StatelessWidget {
               ),
           ],
         ),
-        trailing: IconButton(
-          onPressed: () => context
-              .read<ShoppingCartBloc>()
-              .add(ShoppingCartEvent.addProduct(product: product)),
-          icon: const Icon(Icons.add_shopping_cart_rounded),
-        ),
+        trailing: isFromSearch == null || isFromSearch!
+            ? IconButton(
+                onPressed: () => context
+                    .read<ShoppingCartBloc>()
+                    .add(ShoppingCartEvent.addProduct(product: product)),
+                icon: const Icon(Icons.add_shopping_cart_rounded),
+              )
+            : null,
         onTap: () {},
       ),
     );

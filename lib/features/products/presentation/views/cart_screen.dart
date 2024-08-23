@@ -1,4 +1,5 @@
 import 'package:e_shop/core/extensions/extensions.dart';
+import 'package:e_shop/core/widgets/animated_list.dart';
 import 'package:e_shop/features/products/presentation/blocs/shopping_cart/shopping_cart_bloc.dart';
 import 'package:e_shop/features/products/presentation/widgets/product_factory.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class CartScreen extends StatelessWidget {
       body: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
         builder: (context, state) => state.when(
           data: (products) => products.isEmpty
-              ? const Text("no products")
+              ? const Center(child: Text("no products"))
               : ListView.separated(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -23,8 +24,11 @@ class CartScreen extends StatelessWidget {
                   itemCount: products.length,
                   separatorBuilder: (context, index) => 10.bh,
                   itemBuilder: (BuildContext context, int index) =>
-                      ProductFactory(products[index].price)
-                          .build(products[index]),
+                      LocalAnimatedList(
+                    index: index,
+                    child: ProductFactory(products[index].price)
+                        .build(product: products[index], isFromSearch: false),
+                  ),
                 ),
         ),
       ),

@@ -81,7 +81,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   itemBuilder: (BuildContext context, int index) =>
                       index < products.length
                           ? ProductFactory(products[index].price)
-                              .build(products[index])
+                              .build(product: products[index])
                           : const Center(
                               child: CircularProgressIndicator(),
                             ),

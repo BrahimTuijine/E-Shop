@@ -3,7 +3,7 @@ import 'package:e_shop/features/products/presentation/widgets/product_tile.dart'
 import 'package:flutter/widgets.dart';
 
 abstract class ProductFactory {
-  Widget build(Product product);
+  Widget build({required Product product, bool? isFromSearch});
 
   factory ProductFactory(double? price) => switch (price) {
         != null && < 50 => ProdcutWithBanner(),
@@ -13,12 +13,13 @@ abstract class ProductFactory {
 
 class ProdcutWithBanner implements ProductFactory {
   @override
-  Widget build(Product product) => ClipRect(
+  Widget build({required Product product, bool? isFromSearch}) => ClipRect(
         child: Banner(
           location: BannerLocation.topStart,
           message: '-${product.discountPercentage!.toStringAsFixed(2)}%',
           child: ProductListTile(
             product: product,
+            isFromSearch: isFromSearch,
           ),
         ),
       );
@@ -26,7 +27,9 @@ class ProdcutWithBanner implements ProductFactory {
 
 class ProdcutWithoutBanner implements ProductFactory {
   @override
-  Widget build(Product product) => ProductListTile(
+  Widget build({required Product product, bool? isFromSearch}) =>
+      ProductListTile(
         product: product,
+        isFromSearch: isFromSearch,
       );
 }

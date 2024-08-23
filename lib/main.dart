@@ -1,3 +1,4 @@
+import 'package:e_shop/core/widgets/no_scroll_effect.dart';
 import 'package:e_shop/features/products/presentation/blocs/shopping_cart/shopping_cart_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,12 +32,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         theme: ThemeData(useMaterial3: false),
         debugShowCheckedModeBanner: false,
-        builder: (context, child) {
-          return GestureDetector(
+        builder: (context, child) => NoScrollEffect(
+          child: GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: child,
-          );
-        },
+          ),
+        ),
         routerConfig: AppRouter.router,
       ),
     );
