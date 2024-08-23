@@ -5,6 +5,7 @@ import 'package:e_shop/features/products/presentation/blocs/shopping_cart/shoppi
 import 'package:e_shop/features/products/presentation/widgets/product_factory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -50,14 +51,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
             builder: (context, state) => state.when(
               data: (products) => badges.Badge(
                 position: badges.BadgePosition.topEnd(top: -3, end: 4),
-                showBadge: true,
+                showBadge: products.isNotEmpty,
                 badgeContent: Text(
                   products.length.toString(),
                   style: const TextStyle(color: Colors.white),
                 ),
                 child: IconButton(
                   color: Colors.black,
-                  onPressed: () {},
+                  onPressed: () => context.pushNamed('CartScreen'),
                   icon: const Icon(Icons.shopping_cart),
                 ),
               ),

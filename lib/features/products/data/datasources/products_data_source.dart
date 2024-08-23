@@ -28,8 +28,6 @@ class ProductsDataSourceImpl implements ProductsDataSource {
       },
     );
 
-    print(response.body);
-
     final result = json.decode(response.body);
 
     if ([200, 201].contains(response.statusCode)) {
