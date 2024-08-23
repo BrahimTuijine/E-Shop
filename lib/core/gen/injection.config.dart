@@ -22,6 +22,8 @@ import '../../features/products/domain/usecases/get_products_usecase.dart'
     as _i15;
 import '../../features/products/presentation/blocs/get_products/get_products_bloc.dart'
     as _i270;
+import '../../features/products/presentation/blocs/shopping_cart/shopping_cart_bloc.dart'
+    as _i630;
 import '../network/http_client.dart' as _i1069;
 import '../network/network.dart' as _i855;
 
@@ -38,6 +40,7 @@ _i174.GetIt init(
   );
   final httpClientModule = _$HttpClientModule();
   gh.factory<_i855.ConnectivityModule>(() => _i855.ConnectivityModule());
+  gh.factory<_i630.ShoppingCartBloc>(() => _i630.ShoppingCartBloc());
   gh.lazySingleton<_i519.Client>(() => httpClientModule.httpClient);
   gh.lazySingleton<_i855.NetworkInfo>(() => _i855.NetworkInfoImpl(
       connectivityResult: gh<_i855.ConnectivityModule>()));

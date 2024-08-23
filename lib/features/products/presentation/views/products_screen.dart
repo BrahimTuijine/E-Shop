@@ -1,7 +1,8 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:e_shop/core/extensions/extensions.dart';
 import 'package:e_shop/features/products/presentation/blocs/get_products/get_products_bloc.dart';
+import 'package:e_shop/features/products/presentation/blocs/shopping_cart/shopping_cart_bloc.dart';
 import 'package:e_shop/features/products/presentation/widgets/product_factory.dart';
-import 'package:e_shop/features/products/presentation/widgets/product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +37,34 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     controller.addListener(onScroll);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: const Text(
+          'E-shop',
+          style: TextStyle(color: Colors.black),
+        ),
+        elevation: 0,
+        actions: [
+          BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+            builder: (context, state) => state.when(
+              data: (products) => badges.Badge(
+                position: badges.BadgePosition.topEnd(top: -3, end: 4),
+                showBadge: true,
+                badgeContent: Text(
+                  products.length.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                child: IconButton(
+                  color: Colors.black,
+                  onPressed: () {},
+                  icon: const Icon(Icons.shopping_cart),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: BlocBuilder<GetProductsBloc, GetProductsState>(
         builder: (context, state) => state.maybeWhen(
           loaded: (products, hasReachedMax) => products.isEmpty
@@ -51,7 +79,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   separatorBuilder: (context, index) => 10.bh,
                   itemBuilder: (BuildContext context, int index) =>
                       index < products.length
-                          ? ProductFactory(products[index].discountPercentage)
+                          ? ProductFactory(products[index].price)
                               .build(products[index])
                           : const Center(
                               child: CircularProgressIndicator(),

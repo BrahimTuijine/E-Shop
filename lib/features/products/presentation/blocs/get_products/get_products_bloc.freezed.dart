@@ -72,9 +72,6 @@ class _$GetProductsEventCopyWithImpl<$Res, $Val extends GetProductsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of GetProductsEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -91,9 +88,6 @@ class __$$GetProductsImplCopyWithImpl<$Res>
   __$$GetProductsImplCopyWithImpl(
       _$GetProductsImpl _value, $Res Function(_$GetProductsImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of GetProductsEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -196,9 +190,6 @@ class __$$GetMoreProductsImplCopyWithImpl<$Res>
   __$$GetMoreProductsImplCopyWithImpl(
       _$GetMoreProductsImpl _value, $Res Function(_$GetMoreProductsImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of GetProductsEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -358,9 +349,6 @@ class _$GetProductsStateCopyWithImpl<$Res, $Val extends GetProductsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -377,9 +365,6 @@ class __$$GetProductsInitialImplCopyWithImpl<$Res>
   __$$GetProductsInitialImplCopyWithImpl(_$GetProductsInitialImpl _value,
       $Res Function(_$GetProductsInitialImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -495,9 +480,6 @@ class __$$GetProductsLoadingImplCopyWithImpl<$Res>
   __$$GetProductsLoadingImplCopyWithImpl(_$GetProductsLoadingImpl _value,
       $Res Function(_$GetProductsLoadingImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -616,8 +598,6 @@ class __$$GetProductsLoadedImplCopyWithImpl<$Res>
       $Res Function(_$GetProductsLoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -674,9 +654,7 @@ class _$GetProductsLoadedImpl implements _GetProductsLoaded {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_products), hasReachedMax);
 
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetProductsLoadedImplCopyWith<_$GetProductsLoadedImpl> get copyWith =>
@@ -766,10 +744,7 @@ abstract class _GetProductsLoaded implements GetProductsState {
 
   List<Product> get products;
   bool get hasReachedMax;
-
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetProductsLoadedImplCopyWith<_$GetProductsLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -791,8 +766,6 @@ class __$$GetProductsErrorImplCopyWithImpl<$Res>
       $Res Function(_$GetProductsErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -831,9 +804,7 @@ class _$GetProductsErrorImpl implements _GetProductsError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetProductsErrorImplCopyWith<_$GetProductsErrorImpl> get copyWith =>
@@ -921,10 +892,7 @@ abstract class _GetProductsError implements GetProductsState {
       _$GetProductsErrorImpl;
 
   String get message;
-
-  /// Create a copy of GetProductsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetProductsErrorImplCopyWith<_$GetProductsErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

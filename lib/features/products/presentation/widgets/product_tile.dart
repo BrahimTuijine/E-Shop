@@ -1,6 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:e_shop/features/products/data/models/products_models_export.dart';
+import 'package:e_shop/features/products/presentation/blocs/shopping_cart/shopping_cart_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProductListTile extends StatelessWidget {
@@ -96,7 +97,9 @@ class ProductListTile extends StatelessWidget {
               ],
             ),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () => context
+                  .read<ShoppingCartBloc>()
+                  .add(ShoppingCartEvent.addProduct(product: product)),
               icon: const Icon(Icons.add_shopping_cart_rounded),
             ),
             onTap: () {},
