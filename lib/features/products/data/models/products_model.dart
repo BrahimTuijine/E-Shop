@@ -30,7 +30,7 @@ class ProductsModel {
 }
 
 class Product {
-  final int? id;
+  final int id;
   final String? title;
   final String? description;
   final String? category;
@@ -54,7 +54,7 @@ class Product {
   final List<String>? images;
 
   Product({
-    this.id,
+    required this.id,
     this.title,
     this.description,
     this.category,

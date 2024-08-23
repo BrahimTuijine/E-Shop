@@ -5,6 +5,7 @@ import 'package:e_shop/features/products/presentation/blocs/shopping_cart/shoppi
 import 'package:e_shop/features/products/presentation/widgets/product_factory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -46,6 +47,26 @@ class _ProductsScreenState extends State<ProductsScreen> {
           style: TextStyle(color: Colors.black),
         ),
         elevation: 0,
+        leading: HookBuilder(builder: (context) {
+          final isNotifEnable = useState<bool>(false);
+          return Switch(
+            value: isNotifEnable.value,
+            onChanged: (value) {
+              isNotifEnable.value = value;
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: const Duration(seconds: 1),
+                  content: Text(
+                    textAlign: TextAlign.center,
+                    !value
+                        ? 'notification disabled'
+                        : 'notification enabled , you will recieve a notif every 10 seconds',
+                  ),
+                ),
+              );
+            },
+          );
+        }),
         actions: [
           BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
             builder: (context, state) => state.when(
