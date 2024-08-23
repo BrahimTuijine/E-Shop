@@ -1,9 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:e_shop/features/products/data/models/products_models_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProductListTile extends StatelessWidget {
   final Product product;
+
+  bool isNewProduct(DateTime? createdAt) {
+    if (createdAt == null) return false;
+    final DateTime currentDate = DateTime.now();
+    final Duration difference = currentDate.difference(createdAt);
+    return difference.inDays <= 3;
+  }
+
   const ProductListTile({
     super.key,
     required this.product,
@@ -67,10 +76,11 @@ class ProductListTile extends StatelessWidget {
                     ),
                     onRatingUpdate: (rating) {},
                   ),
-                if (product.price != null && product.price! < 50)
-                  Text(
-                    'Promotion: -${product.discountPercentage!.toStringAsFixed(2)}%',
-                    style: const TextStyle(
+                if (product.meta?.createdAt != null &&
+                    isNewProduct(product.meta!.createdAt))
+                  const Text(
+                    'Nouveau',
+                    style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
                     ),

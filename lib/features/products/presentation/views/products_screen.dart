@@ -1,5 +1,6 @@
 import 'package:e_shop/core/extensions/extensions.dart';
 import 'package:e_shop/features/products/presentation/blocs/get_products/get_products_bloc.dart';
+import 'package:e_shop/features/products/presentation/widgets/product_factory.dart';
 import 'package:e_shop/features/products/presentation/widgets/product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,13 +32,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
     super.dispose();
   }
 
-  bool isNewProduct(DateTime? createdAt) {
-    if (createdAt == null) return false;
-    final DateTime currentDate = DateTime.now();
-    final Duration difference = currentDate.difference(createdAt);
-    return difference.inDays <= 3;
-  }
-
   @override
   Widget build(BuildContext context) {
     controller.addListener(onScroll);
@@ -57,18 +51,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   separatorBuilder: (context, index) => 10.bh,
                   itemBuilder: (BuildContext context, int index) =>
                       index < products.length
-                          //TODO make it factory
-                          ? isNewProduct(products[index].meta?.createdAt)
-                              ? Banner(
-                                  location: BannerLocation.topStart,
-                                  message: 'Nouveau',
-                                  child: ProductListTile(
-                                    product: products[index],
-                                  ),
-                                )
-                              : ProductListTile(
-                                  product: products[index],
-                                )
+                          ? ProductFactory(products[index].discountPercentage)
+                              .build(products[index])
                           : const Center(
                               child: CircularProgressIndicator(),
                             ),
