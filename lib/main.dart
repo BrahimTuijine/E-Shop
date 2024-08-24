@@ -13,8 +13,6 @@ import 'core/bootstrap/bootstrap.dart';
 import 'core/environment/environment.dart';
 import 'core/gen/injection.dart';
 
-//TODO ma tensech readme file
-
 Box? box;
 
 Future<void> main() async {

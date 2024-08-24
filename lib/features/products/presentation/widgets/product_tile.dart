@@ -54,7 +54,6 @@ class ProductListTile extends StatelessWidget {
           titleAlignment: ListTileTitleAlignment.center,
           contentPadding:
               const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-          //TODO change it to cachedNetworkImage
           leading: Hero(
             tag: product.id,
             child: Image.network(
