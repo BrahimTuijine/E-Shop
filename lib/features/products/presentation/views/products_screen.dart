@@ -21,6 +21,7 @@ class ProductsScreen extends StatefulWidget {
 
 class _ProductsScreenState extends State<ProductsScreen> {
   final ScrollController controller = ScrollController();
+  final TextEditingController searchController = TextEditingController();
   Timer? _checkTypingTimer;
 
   void onScroll() {
@@ -37,6 +38,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   void dispose() {
     controller.dispose();
+    searchController.dispose();
     super.dispose();
   }
 
@@ -120,59 +122,72 @@ class _ProductsScreenState extends State<ProductsScreen> {
               ),
             ),
           ),
+          5.bw,
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Search',
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
-                prefixIcon: Icon(Icons.search),
-              ),
-              onChanged: (value) {
-                _checkTypingTimer?.cancel();
-                _checkTypingTimer =
-                    Timer(const Duration(milliseconds: 600), () {
-                  context.read<GetProductsBloc>().add(
-                      GetProductsEvent.searchProducts(
-                          title: value, minPrice: 0, maxPrice: 0));
-                });
-              },
-            ),
-            16.bh,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text('Price: '),
-                Expanded(
-                  child: HookBuilder(builder: (context) {
-                    final minPrice = useState(0.0);
-                    final maxPrice = useState(1000.0);
-                    return RangeSlider(
-                      values: RangeValues(minPrice.value, maxPrice.value),
-                      min: 0,
-                      max: 1000,
-                      divisions: 100,
-                      labels: RangeLabels(
-                        minPrice.value.toStringAsFixed(2),
-                        maxPrice.value.toStringAsFixed(2),
-                      ),
-                      onChangeEnd: (value) {
-                        print('change end');
-                      },
-                      onChanged: (RangeValues values) {
-                        minPrice.value = values.start;
-                        maxPrice.value = values.end;
-                      },
-                    );
-                  }),
-                ),
-              ],
-            ),
+            HookBuilder(builder: (context) {
+              final minPrice = useState(0.0);
+              final maxPrice = useState(1000.0);
+              return Column(
+                children: [
+                  TextField(
+                    controller: searchController,
+                    decoration: const InputDecoration(
+                      labelText: 'Search',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                      prefixIcon: Icon(Icons.search),
+                    ),
+                    onChanged: (value) {
+                      _checkTypingTimer?.cancel();
+                      _checkTypingTimer =
+                          Timer(const Duration(milliseconds: 600), () {
+                        context.read<GetProductsBloc>().add(
+                              GetProductsEvent.searchProducts(
+                                  title: value,
+                                  minPrice: minPrice.value,
+                                  maxPrice: maxPrice.value),
+                            );
+                      });
+                    },
+                  ),
+                  16.bh,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text('Price: '),
+                      Expanded(
+                          child: RangeSlider(
+                        values: RangeValues(minPrice.value, maxPrice.value),
+                        min: 0,
+                        max: 1000,
+                        divisions: 100,
+                        labels: RangeLabels(
+                          minPrice.value.toStringAsFixed(2),
+                          maxPrice.value.toStringAsFixed(2),
+                        ),
+                        onChangeEnd: (value) =>
+                            context.read<GetProductsBloc>().add(
+                                  GetProductsEvent.searchProducts(
+                                    title: searchController.text,
+                                    minPrice: minPrice.value,
+                                    maxPrice: maxPrice.value,
+                                  ),
+                                ),
+                        onChanged: (RangeValues values) {
+                          minPrice.value = values.start;
+                          maxPrice.value = values.end;
+                        },
+                      )),
+                    ],
+                  ),
+                ],
+              );
+            }),
             Expanded(
               child: BlocBuilder<GetProductsBloc, GetProductsState>(
                 builder: (context, state) => state.maybeWhen(

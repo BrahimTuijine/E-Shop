@@ -20,7 +20,7 @@ mixin _$GetProductsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getProducts,
     required TResult Function() getMoreProducts,
-    required TResult Function(String title, int minPrice, int maxPrice)
+    required TResult Function(String title, double minPrice, double maxPrice)
         searchProducts,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,14 +28,16 @@ mixin _$GetProductsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getProducts,
     TResult? Function()? getMoreProducts,
-    TResult? Function(String title, int minPrice, int maxPrice)? searchProducts,
+    TResult? Function(String title, double minPrice, double maxPrice)?
+        searchProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getProducts,
     TResult Function()? getMoreProducts,
-    TResult Function(String title, int minPrice, int maxPrice)? searchProducts,
+    TResult Function(String title, double minPrice, double maxPrice)?
+        searchProducts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,7 +123,7 @@ class _$GetProductsImpl implements GetProducts {
   TResult when<TResult extends Object?>({
     required TResult Function() getProducts,
     required TResult Function() getMoreProducts,
-    required TResult Function(String title, int minPrice, int maxPrice)
+    required TResult Function(String title, double minPrice, double maxPrice)
         searchProducts,
   }) {
     return getProducts();
@@ -132,7 +134,8 @@ class _$GetProductsImpl implements GetProducts {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getProducts,
     TResult? Function()? getMoreProducts,
-    TResult? Function(String title, int minPrice, int maxPrice)? searchProducts,
+    TResult? Function(String title, double minPrice, double maxPrice)?
+        searchProducts,
   }) {
     return getProducts?.call();
   }
@@ -142,7 +145,8 @@ class _$GetProductsImpl implements GetProducts {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getProducts,
     TResult Function()? getMoreProducts,
-    TResult Function(String title, int minPrice, int maxPrice)? searchProducts,
+    TResult Function(String title, double minPrice, double maxPrice)?
+        searchProducts,
     required TResult orElse(),
   }) {
     if (getProducts != null) {
@@ -230,7 +234,7 @@ class _$GetMoreProductsImpl implements GetMoreProducts {
   TResult when<TResult extends Object?>({
     required TResult Function() getProducts,
     required TResult Function() getMoreProducts,
-    required TResult Function(String title, int minPrice, int maxPrice)
+    required TResult Function(String title, double minPrice, double maxPrice)
         searchProducts,
   }) {
     return getMoreProducts();
@@ -241,7 +245,8 @@ class _$GetMoreProductsImpl implements GetMoreProducts {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getProducts,
     TResult? Function()? getMoreProducts,
-    TResult? Function(String title, int minPrice, int maxPrice)? searchProducts,
+    TResult? Function(String title, double minPrice, double maxPrice)?
+        searchProducts,
   }) {
     return getMoreProducts?.call();
   }
@@ -251,7 +256,8 @@ class _$GetMoreProductsImpl implements GetMoreProducts {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getProducts,
     TResult Function()? getMoreProducts,
-    TResult Function(String title, int minPrice, int maxPrice)? searchProducts,
+    TResult Function(String title, double minPrice, double maxPrice)?
+        searchProducts,
     required TResult orElse(),
   }) {
     if (getMoreProducts != null) {
@@ -305,7 +311,7 @@ abstract class _$$SearchProductsImplCopyWith<$Res> {
           $Res Function(_$SearchProductsImpl) then) =
       __$$SearchProductsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String title, int minPrice, int maxPrice});
+  $Res call({String title, double minPrice, double maxPrice});
 }
 
 /// @nodoc
@@ -331,11 +337,11 @@ class __$$SearchProductsImplCopyWithImpl<$Res>
       minPrice: null == minPrice
           ? _value.minPrice
           : minPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       maxPrice: null == maxPrice
           ? _value.maxPrice
           : maxPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -349,9 +355,9 @@ class _$SearchProductsImpl implements SearchProducts {
   @override
   final String title;
   @override
-  final int minPrice;
+  final double minPrice;
   @override
-  final int maxPrice;
+  final double maxPrice;
 
   @override
   String toString() {
@@ -385,7 +391,7 @@ class _$SearchProductsImpl implements SearchProducts {
   TResult when<TResult extends Object?>({
     required TResult Function() getProducts,
     required TResult Function() getMoreProducts,
-    required TResult Function(String title, int minPrice, int maxPrice)
+    required TResult Function(String title, double minPrice, double maxPrice)
         searchProducts,
   }) {
     return searchProducts(title, minPrice, maxPrice);
@@ -396,7 +402,8 @@ class _$SearchProductsImpl implements SearchProducts {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getProducts,
     TResult? Function()? getMoreProducts,
-    TResult? Function(String title, int minPrice, int maxPrice)? searchProducts,
+    TResult? Function(String title, double minPrice, double maxPrice)?
+        searchProducts,
   }) {
     return searchProducts?.call(title, minPrice, maxPrice);
   }
@@ -406,7 +413,8 @@ class _$SearchProductsImpl implements SearchProducts {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getProducts,
     TResult Function()? getMoreProducts,
-    TResult Function(String title, int minPrice, int maxPrice)? searchProducts,
+    TResult Function(String title, double minPrice, double maxPrice)?
+        searchProducts,
     required TResult orElse(),
   }) {
     if (searchProducts != null) {
@@ -453,12 +461,12 @@ class _$SearchProductsImpl implements SearchProducts {
 abstract class SearchProducts implements GetProductsEvent {
   const factory SearchProducts(
       {required final String title,
-      required final int minPrice,
-      required final int maxPrice}) = _$SearchProductsImpl;
+      required final double minPrice,
+      required final double maxPrice}) = _$SearchProductsImpl;
 
   String get title;
-  int get minPrice;
-  int get maxPrice;
+  double get minPrice;
+  double get maxPrice;
   @JsonKey(ignore: true)
   _$$SearchProductsImplCopyWith<_$SearchProductsImpl> get copyWith =>
       throw _privateConstructorUsedError;
