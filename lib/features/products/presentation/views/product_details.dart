@@ -26,7 +26,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Image.network(
                   product.thumbnail.toString(),
                   width: size.width,
-                  height: 200,
+                  height: size.height * .35,
                   fit: BoxFit.contain,
                 ),
               ),

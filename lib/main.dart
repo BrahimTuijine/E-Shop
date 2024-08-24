@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<ShoppingCartBloc>(),
       child: MaterialApp.router(
-        theme: ThemeData(useMaterial3: false),
+        theme: ThemeData(useMaterial3: true),
         debugShowCheckedModeBanner: false,
         builder: (context, child) => NoScrollEffect(
           child: GestureDetector(

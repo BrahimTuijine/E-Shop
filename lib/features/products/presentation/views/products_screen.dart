@@ -49,22 +49,25 @@ class _ProductsScreenState extends State<ProductsScreen> {
         elevation: 0,
         leading: HookBuilder(builder: (context) {
           final isNotifEnable = useState<bool>(false);
-          return Switch(
-            value: isNotifEnable.value,
-            onChanged: (value) {
-              isNotifEnable.value = value;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  duration: const Duration(seconds: 1),
-                  content: Text(
-                    textAlign: TextAlign.center,
-                    !value
-                        ? 'notification disabled'
-                        : 'notification enabled , you will recieve a notif every 10 seconds',
+          return Transform.scale(
+            scale: .7,
+            child: Switch(
+              value: isNotifEnable.value,
+              onChanged: (value) {
+                isNotifEnable.value = value;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    duration: const Duration(seconds: 1),
+                    content: Text(
+                      textAlign: TextAlign.center,
+                      !value
+                          ? 'notification disabled'
+                          : 'notification enabled , you will recieve a notif every 10 seconds',
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         }),
         actions: [

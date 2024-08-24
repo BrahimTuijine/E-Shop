@@ -13,11 +13,12 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     on<ShoppingCartEvent>((event, emit) {
       event.when(
         addProduct: (product) {
-          emit(ShoppingCartState.data(products: [...state.products, product]));
+          emit(ShoppingCartState.data(products: [product, ...state.products]));
         },
         removeProduct: (id) {
-          state.products.removeWhere((product) => product.id == id);
-          emit(ShoppingCartState.data(products: [...state.products]));
+          List<Product> productList = [...state.products];
+          productList.removeWhere((product) => product.id == id);
+          emit(ShoppingCartState.data(products: productList));
         },
       );
     });
