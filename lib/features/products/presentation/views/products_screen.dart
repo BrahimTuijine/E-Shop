@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:badges/badges.dart' as badges;
 import 'package:e_shop/core/extensions/extensions.dart';
 import 'package:e_shop/features/products/presentation/blocs/get_products/get_products_bloc.dart';
@@ -17,6 +19,7 @@ class ProductsScreen extends StatefulWidget {
 
 class _ProductsScreenState extends State<ProductsScreen> {
   final ScrollController controller = ScrollController();
+  Timer? _checkTypingTimer;
 
   void onScroll() {
     double maxScroll = controller.position.maxScrollExtent;
@@ -90,32 +93,88 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ],
       ),
-      body: BlocBuilder<GetProductsBloc, GetProductsState>(
-        builder: (context, state) => state.maybeWhen(
-          loaded: (products, hasReachedMax) => products.isEmpty
-              ? const Text("no products")
-              : ListView.separated(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                  controller: controller,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount:
-                      (hasReachedMax) ? products.length : products.length + 1,
-                  separatorBuilder: (context, index) => 10.bh,
-                  itemBuilder: (BuildContext context, int index) =>
-                      index < products.length
-                          ? ProductFactory(products[index].price)
-                              .build(product: products[index])
-                          : const Center(
-                              child: CircularProgressIndicator(),
-                            ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'Search',
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                prefixIcon: Icon(Icons.search),
+              ),
+              onChanged: (value) {
+                _checkTypingTimer?.cancel();
+                _checkTypingTimer =
+                    Timer(const Duration(milliseconds: 600), () {
+                  context.read<GetProductsBloc>().add(
+                      GetProductsEvent.searchProducts(
+                          title: value, minPrice: 0, maxPrice: 0));
+                });
+              },
+            ),
+            16.bh,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Price: '),
+                Expanded(
+                  child: HookBuilder(builder: (context) {
+                    final minPrice = useState(0.0);
+                    final maxPrice = useState(1000.0);
+                    return RangeSlider(
+                      values: RangeValues(minPrice.value, maxPrice.value),
+                      min: 0,
+                      max: 1000,
+                      divisions: 100,
+                      labels: RangeLabels(
+                        minPrice.value.toStringAsFixed(2),
+                        maxPrice.value.toStringAsFixed(2),
+                      ),
+                      onChangeEnd: (value) {
+                        print('change end');
+                      },
+                      onChanged: (RangeValues values) {
+                        minPrice.value = values.start;
+                        maxPrice.value = values.end;
+                      },
+                    );
+                  }),
                 ),
-          error: (message) => Center(
-            child: Text(message),
-          ),
-          orElse: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
+              ],
+            ),
+            Expanded(
+              child: BlocBuilder<GetProductsBloc, GetProductsState>(
+                builder: (context, state) => state.maybeWhen(
+                  loaded: (products, hasReachedMax) => products.isEmpty
+                      ? const Center(child: Text("no products"))
+                      : ListView.separated(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          controller: controller,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: (hasReachedMax)
+                              ? products.length
+                              : products.length + 1,
+                          separatorBuilder: (context, index) => 10.bh,
+                          itemBuilder: (BuildContext context, int index) =>
+                              index < products.length
+                                  ? ProductFactory(products[index].price)
+                                      .build(product: products[index])
+                                  : const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                        ),
+                  error: (message) => Center(
+                    child: Text(message),
+                  ),
+                  orElse: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

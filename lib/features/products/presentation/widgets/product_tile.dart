@@ -22,7 +22,7 @@ class ProductListTile extends StatelessWidget {
     return Dismissible(
       direction: isFromSearch == null
           ? DismissDirection.none
-          : DismissDirection.horizontal,
+          : DismissDirection.endToStart,
       key: ValueKey<int>(product.id),
       background: Container(
         color: Colors.red,
@@ -64,14 +64,13 @@ class ProductListTile extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          title: product.title != null
-              ? Text(
-                  product.title!,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              : null,
+          title: Text(
+            product.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

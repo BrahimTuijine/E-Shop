@@ -13,7 +13,8 @@ class ProductDetailsScreen extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: product.title != null ? Text(product.title!) : null,
+        centerTitle: true,
+        title: const Text('product details'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -31,11 +32,10 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ),
               16.bh,
-              if (product.title != null)
-                Text(
-                  product.title!,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
+              Text(
+                product.title,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               8.bh,
               if (product.price != null)
                 Text(

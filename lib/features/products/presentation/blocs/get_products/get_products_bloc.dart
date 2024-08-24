@@ -67,6 +67,19 @@ class GetProductsBloc extends Bloc<GetProductsEvent, GetProductsState> {
             ));
           });
         },
+        searchProducts: (String title, int minPrice, int maxPrice) {
+          if (title.isEmpty) {
+            emit(GetProductsState.loaded(
+                products: oldData, hasReachedMax: hasReachedMax));
+          } else {
+            final filtredProducts = oldData
+                .where((product) =>
+                    product.title.toLowerCase().contains(title.toLowerCase()))
+                .toList();
+            emit(GetProductsState.loaded(
+                products: filtredProducts, hasReachedMax: hasReachedMax));
+          }
+        },
       );
     });
   }

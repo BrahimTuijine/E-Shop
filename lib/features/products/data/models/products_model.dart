@@ -31,7 +31,7 @@ class ProductsModel {
 
 class Product {
   final int id;
-  final String? title;
+  final String title;
   final String? description;
   final String? category;
   final double? price;
@@ -55,7 +55,7 @@ class Product {
 
   Product({
     required this.id,
-    this.title,
+   required this.title,
     this.description,
     this.category,
     this.price,
