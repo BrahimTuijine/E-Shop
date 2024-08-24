@@ -73,7 +73,7 @@ class GetProductsBloc extends Bloc<GetProductsEvent, GetProductsState> {
                 products: oldData, hasReachedMax: hasReachedMax));
           } else {
             final filtredProducts = oldData
-                .where((product) =>
+                .where((Product product) =>
                     product.title.toLowerCase().contains(title.toLowerCase()))
                 .toList();
             emit(GetProductsState.loaded(

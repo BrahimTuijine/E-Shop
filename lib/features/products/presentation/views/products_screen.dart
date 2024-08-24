@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:badges/badges.dart' as badges;
 import 'package:e_shop/core/extensions/extensions.dart';
+import 'package:e_shop/core/local_notification/notification.dart';
+import 'package:e_shop/features/authentication/presentation/blocs/sing_out/sing_out_bloc.dart';
 import 'package:e_shop/features/products/presentation/blocs/get_products/get_products_bloc.dart';
 import 'package:e_shop/features/products/presentation/blocs/shopping_cart/shopping_cart_bloc.dart';
 import 'package:e_shop/features/products/presentation/widgets/product_factory.dart';
@@ -50,30 +52,57 @@ class _ProductsScreenState extends State<ProductsScreen> {
           style: TextStyle(color: Colors.black),
         ),
         elevation: 0,
-        leading: HookBuilder(builder: (context) {
-          final isNotifEnable = useState<bool>(false);
-          return Transform.scale(
-            scale: .7,
-            child: Switch(
-              value: isNotifEnable.value,
-              onChanged: (value) {
-                isNotifEnable.value = value;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: const Duration(seconds: 1),
-                    content: Text(
-                      textAlign: TextAlign.center,
-                      !value
-                          ? 'notification disabled'
-                          : 'notification enabled , you will recieve a notif every 10 seconds',
-                    ),
-                  ),
-                );
+        leading: BlocConsumer<SingOutBloc, SingOutState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              error: (message) => ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(message),
+                ),
+              ),
+              loaded: () => context.pushReplacement('/auth'),
+            );
+          },
+          builder: (context, state) => state.maybeWhen(
+            loading: () => const CircularProgressIndicator(),
+            orElse: () => IconButton(
+              onPressed: () {
+                BlocProvider.of<SingOutBloc>(context)
+                    .add(const SingOutEvent.singOut());
               },
+              icon: const Icon(Icons.logout),
             ),
-          );
-        }),
+          ),
+        ),
         actions: [
+          HookBuilder(builder: (context) {
+            final isNotifEnable = useState<bool>(false);
+            return Transform.scale(
+              scale: .7,
+              child: Switch(
+                value: isNotifEnable.value,
+                onChanged: (value) async {
+                  isNotifEnable.value = value;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      duration: Duration(seconds: 1),
+                      content: Text(
+                        textAlign: TextAlign.center,
+                        'you will recieve a notif after 5 seconds',
+                      ),
+                    ),
+                  );
+                  await NotificationService.showNotification(
+                    title: "Scheduled Notification",
+                    body:
+                        "notification ${value ? 'enabled' : 'disabled'} Notification was fired after 5 seconds",
+                    interval: 5,
+                    scheduled: true,
+                  );
+                },
+              ),
+            );
+          }),
           BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
             builder: (context, state) => state.when(
               data: (products) => badges.Badge(
